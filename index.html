@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Login</title>
+<style>
+body{
+font-family: Arial;
+background:#eef2f7;
+text-align:center;
+margin-top:80px;
+}
+.box{
+background:white;
+width:320px;
+padding:30px;
+margin:auto;
+border-radius:10px;
+box-shadow:0px 0px 10px gray;
+}
+input{
+width:90%;
+padding:10px;
+margin:8px;
+}
+button{
+padding:10px 20px;
+background:green;
+color:white;
+border:none;
+cursor:pointer;
+}
+</style>
+</head>
+
+<body>
+<div class="box">
+<h2>Login</h2>
+
+<input type="text" id="username" placeholder="Username"><br>
+<input type="email" id="email" placeholder="Email"><br>
+<input type="password" id="pass" placeholder="Password"><br>
+
+<button onclick="login()">Login</button>
+</div>
+
+<script>
+function login(){
+let u = document.getElementById("username").value;
+let e = document.getElementById("email").value;
+let p = document.getElementById("pass").value;
+
+let su = localStorage.getItem("username");
+let se = localStorage.getItem("email");
+let sp = localStorage.getItem("password");
+
+if(u==su && e==se && p==sp){
+  alert("Login Successful");
+  window.location.href = "upload.html";
+}
+else{
+  alert("Wrong Username / Email / Password");
+}
+}
+</script>
+</body>
+</html>
