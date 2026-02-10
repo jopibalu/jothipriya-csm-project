@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Upload Page</title>
+
+<style>
+body{
+ font-family: Arial;
+ background-color: #f1f8e9;
+ display:flex;
+ justify-content:center;
+ align-items:center;
+ height:100vh;
+}
+
+.upload-box{
+ background:white;
+ padding:30px;
+ border-radius:10px;
+ box-shadow:0 0 10px gray;
+ text-align:center;
+}
+</style>
+
+</head>
+
+<body>
+
+<div class="upload-box">
+
+<h2>Upload File to Cloud</h2>
+
+<input type="file" id="file"><br><br>
+
+<button onclick="uploadFile()">Upload</button><br><br>
+
+<a href="https://drive.google.com" target="_blank">
+Open Cloud Storage
+</a>
+
+</div>
+
+<script>
+
+function uploadFile(){
+
+ let file = document.getElementById("file").files[0];
+
+ if(!file){
+   alert("Select File First");
+   return;
+ }
+
+ let reader = new FileReader();
+
+ reader.onload = function(){
+
+   fetch("https://script.google.com/macros/s/AKfycbxQ1A4M3B3Df2oR2oA0oDCf6baxOSDLwg2dFnA3Ydk4M7zYcCpmbWiK_D69VoJur4GaUA/exec", {
+     method: "POST",
+     body: reader.result
+   })
+   .then(res => res.text())
+   .then(data => alert("File Uploaded Successfully"))
+   .catch(err => alert("Upload Failed"));
+
+ };
+
+ reader.readAsDataURL(file);
+
+}
+
+</script>
+
+</body>
+</html>
